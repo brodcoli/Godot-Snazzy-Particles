@@ -1,0 +1,84 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://Main.shader" type="Shader" id=1]
+[ext_resource path="res://Particles.gd" type="Script" id=2]
+[ext_resource path="res://Camera.gd" type="Script" id=3]
+[ext_resource path="res://Main.gd" type="Script" id=4]
+
+[sub_resource type="Environment" id=1]
+background_mode = 1
+
+[sub_resource type="SpatialMaterial" id=2]
+flags_unshaded = true
+albedo_color = Color( 1, 0.34, 0.34, 1 )
+
+[sub_resource type="SphereMesh" id=3]
+material = SubResource( 2 )
+
+[sub_resource type="SpatialMaterial" id=4]
+flags_unshaded = true
+albedo_color = Color( 0.31, 0.3675, 1, 1 )
+
+[sub_resource type="SphereMesh" id=5]
+material = SubResource( 4 )
+
+[sub_resource type="SpatialMaterial" id=6]
+flags_unshaded = true
+albedo_color = Color( 0.33, 1, 0.419333, 1 )
+
+[sub_resource type="SphereMesh" id=7]
+material = SubResource( 6 )
+
+[sub_resource type="ShaderMaterial" id=8]
+shader = ExtResource( 1 )
+shader_param/pointA = Vector3( 0, 0, 10 )
+shader_param/pointB = Vector3( 10, 0, -10 )
+shader_param/pointC = Vector3( -10, -10, -5 )
+shader_param/initial_force = 10.0
+shader_param/gravity = 5.0
+shader_param/area = 3.0
+
+[sub_resource type="SpatialMaterial" id=9]
+flags_transparent = true
+flags_unshaded = true
+flags_use_point_size = true
+albedo_color = Color( 1, 1, 1, 0.00392157 )
+
+[sub_resource type="PointMesh" id=10]
+material = SubResource( 9 )
+
+[node name="Main" type="Spatial"]
+script = ExtResource( 4 )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 1 )
+
+[node name="PointA" type="MeshInstance" parent="."]
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="PointB" type="MeshInstance" parent="."]
+mesh = SubResource( 5 )
+material/0 = null
+
+[node name="PointC" type="MeshInstance" parent="."]
+mesh = SubResource( 7 )
+material/0 = null
+
+[node name="Particles" type="Particles" parent="."]
+emitting = false
+amount = 10000
+lifetime = 600.0
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource( 8 )
+draw_pass_1 = SubResource( 10 )
+script = ExtResource( 2 )
+
+[node name="CameraWrapper" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.847113, -0.531413, 0, 0.531413, 0.847113, 0, 0, 0 )
+script = ExtResource( 3 )
+
+[node name="Camera" type="Camera" parent="CameraWrapper"]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -120 )
+far = 10000.0
