@@ -34,13 +34,10 @@ void vertex(){
 		uint alt_seed = hash(uint(INDEX) + uint(1) + RANDOM_SEED);
 		uint alt_seed_2 = hash(uint(INDEX) + uint(27) + RANDOM_SEED);
 		uint alt_seed_3 = hash(uint(INDEX) + uint(43) + RANDOM_SEED);
-		uint alt_seed_4 = hash(uint(INDEX) + uint(78) + RANDOM_SEED);
-		uint alt_seed_5 = hash(uint(INDEX) + uint(113) + RANDOM_SEED);
-		uint alt_seed_6 = hash(uint(INDEX) + uint(194) + RANDOM_SEED);
 	
 		vec3 position = vec3(rand_from_seed(alt_seed) * area, rand_from_seed(alt_seed_2) * area, rand_from_seed(alt_seed_3) * area);
 		TRANSFORM[3].xyz = position;
-		VELOCITY = vec3(0.0, -1.0, 0.0) * initial_force;//vec3(rand_from_seed(alt_seed_4) * initial_force, rand_from_seed(alt_seed_5) * initial_force, rand_from_seed(alt_seed_6) * initial_force);
+		VELOCITY = vec3(0.0, -1.0, 0.0) * initial_force;
 	}else{
 		vec3 v = pointA - TRANSFORM[3].xyz;
 		vec3 v2 = pointB - TRANSFORM[3].xyz;
