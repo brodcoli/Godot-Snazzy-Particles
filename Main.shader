@@ -5,8 +5,8 @@ uniform vec3 pointB = vec3(10.0, 0.0, -10.0);
 uniform vec3 pointC = vec3(-10.0, -10.0, -5.0);
 
 uniform float initial_force = 10.0;
+uniform float initial_spawn_area = 3.0;
 uniform float gravity = 5.0;
-uniform float area = 3.0;
 
 float rand_from_seed(in uint seed) {
   int k;
@@ -35,7 +35,7 @@ void vertex(){
 		uint alt_seed_2 = hash(uint(INDEX) + uint(27) + RANDOM_SEED);
 		uint alt_seed_3 = hash(uint(INDEX) + uint(43) + RANDOM_SEED);
 	
-		vec3 position = vec3(rand_from_seed(alt_seed) * area, rand_from_seed(alt_seed_2) * area, rand_from_seed(alt_seed_3) * area);
+		vec3 position = vec3(rand_from_seed(alt_seed), rand_from_seed(alt_seed_2), rand_from_seed(alt_seed_3)) * initial_spawn_area;
 		TRANSFORM[3].xyz = position;
 		VELOCITY = vec3(0.0, -1.0, 0.0) * initial_force;
 	}else{
