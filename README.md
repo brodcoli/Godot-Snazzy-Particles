@@ -1,4 +1,4 @@
-# Godot-Snazzy-Particles
+# Godot-Snazzy-Particles (Godot 3.5)
 
 ![](https://i.imgur.com/DbZYjEz.png)
 
